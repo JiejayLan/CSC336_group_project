@@ -2,7 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 var app = express();
 var outputString = "";
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3003;
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
@@ -18,21 +18,18 @@ var connection = mysql.createConnection({
     database: 'jobfirst_database'
 });
 
+
 connection.connect(function(err)
 {
     console.log("connecting");
     if (err) {
         console.log(err);
-        // app.locals.connectionerror = err.stack;
         return;
     }
 });
 
 
-
-
 app.get('/', function(req, res) {
-
     connection.query(query_test_select, (error, results, fields) => {
         console.log(results);
         res.render('pages/index');
@@ -44,14 +41,20 @@ app.get('/', function(req, res) {
 });
 
 // about page 
+app.get('/login', function(req, res) {
+	res.render('pages/login');
+});
+
+// about page 
 app.get('/about', function(req, res) {
 	res.render('pages/about');
 });
 
 
+
 app.use(express.static('public'));
 
-//[5] Listen for incoming requests
+//Listen for incoming requests
 app.listen(port, () => {
     console.log('Server is up!');
   });
