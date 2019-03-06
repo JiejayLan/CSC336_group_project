@@ -4,7 +4,7 @@ var app = express();
 var outputString = "";
 const port = process.env.PORT || 3001;
 app.engine('html', require('ejs').renderFile);
-
+app.set('view engine', 'ejs');
 
 const query_test_create = 'CREATE TABLE Test(EmplId INT, Name varchar(100), HireDate varchar(100));'
 const query_test_select = 'SELECT * FROM Test ORDER BY EmplId;';
@@ -35,13 +35,19 @@ app.get('/', function(req, res) {
 
     connection.query(query_test_select, (error, results, fields) => {
         console.log(results);
-        res.render('index.html');
+        res.render('pages/index');
         if (error) {
             throw error;
         }
     });
 
 });
+
+// about page 
+app.get('/about', function(req, res) {
+	res.render('pages/about');
+});
+
 
 app.use(express.static('public'));
 
