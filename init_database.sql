@@ -7,17 +7,26 @@ CREATE TABLE User (
     user_ID INTEGER UNSIGNED NOT NULL,
 	username VARCHAR(64) NOT NULL,
 	password VARCHAR(64) NOT NULL,
+    phone_number VARCHAR,
+    email VARCHAR,
+
 	PRIMARY KEY(user_ID)
 );
 
 -- NEED INFO
 CREATE TABLE Employee (
     employee_ID INTEGER UNSIGNED NOT NULL REFERENCES User(user_ID),
+    education VARCHAR(128),
+    experience VARCHAR(256),
+
 	PRIMARY KEY(employee_ID)
 );
 
-CREATE TABLE Employeer (
-    employeer_ID INTEGER UNSIGNED NOT NULL REFERENCES User(user_ID),
+CREATE TABLE Employer (
+    employer_ID INTEGER UNSIGNED NOT NULL REFERENCES User(user_ID),
+    business VARCHAR,
+    address VARCHAR,
+    
 	PRIMARY KEY(employeer_ID)
 );
 
@@ -31,6 +40,10 @@ CREATE TABLE User_Type(
 CREATE TABLE Jobs (
     job_ID INTEGER UNSIGNED,
     poster_ID INTEGER UNSIGNED NOT NULL REFERENCES Employeer(employeer_ID),
+    job_title VARCHAR,
+    description VARCHAR,
+    location VARCHAR,
+
 	PRIMARY KEY(job_ID)
 );
 
@@ -51,6 +64,8 @@ CREATE TABLE Follow(
 CREATE TABLE Application(
     application_ID INTEGER UNSIGNED NOT NULL,
     created_on DATETIME,
+    applicant_ID INTEGER UNSIGNED NOT NULL REFERENCES Employee(employee_ID),
+    applied_jobID INTEGER UNSIGNED NOT NULL REFERENCES Jobs(job_ID),
     PRIMARY KEY(application_ID)
 );
 
