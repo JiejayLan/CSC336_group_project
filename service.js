@@ -15,7 +15,7 @@ const CONNECTION = mysql.createConnection({
     user: "nooredin",
     password: 'nooredin',
     port: 3306,
-    database: 'jobfirst_database'
+    database: 'job_first'
 })
 
 //  Route handling.
