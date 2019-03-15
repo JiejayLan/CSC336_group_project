@@ -17,7 +17,7 @@ module.exports = (connection) => {
           (error, results, fields) => {
               if (error) {
                   console.log(error)
-                  res.error()
+                  res.json(error)
               } else {
                   res.json(results)
               }
