@@ -3,8 +3,6 @@ const mysql = require('mysql');
 const app = express();
 const port = process.env.PORT || 3003;
 
-
-
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
@@ -25,6 +23,7 @@ const CONNECTION = mysql.createConnection({
 app.get('/', require('./controllers/index_controller.js')(CONNECTION));
 app.get('/users/:emplid', require('./controllers/get_user.js')(CONNECTION));
 app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(CONNECTION));
+
 
 // about page 
 app.get('/login', function(req, res) {
