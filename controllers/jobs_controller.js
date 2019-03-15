@@ -1,18 +1,31 @@
 ;
 
 module.exports = (connection) => {
-  // return (req, res) => {
-  //   res.render('pages/index');
-  // }
   return (req, res) => {
-      
-      
-    const QUERY = 
-        ' SELECT *' +
-        ' FROM Jobs' ;
-    
+    let QUERY;
+    let user_location =req.query.InputLocation; 
+    let user_id = req.params.id;
+    let user_title =req.query.InputTitle;
+    console.log('id is ',req.params.id)
+    let query ='';
+    let queryParam =[];
+
+    //how to use WHERE LIKE here to find the substring
+    if((user_location == null||user_location=='') ){
+        QUERY = 
+        ' SELECT job_ID, job_title, location FROM Jobs' ;
+    }
+    else{
+        QUERY = 
+        ' SELECT job_ID, job_title, location FROM Jobs WHERE location = ?;';  
+        queryParam =[user_location];       
+    }
+
+
+    console.log('query ares', queryParam);
     connection.query( 
         QUERY,
+        queryParam,
         (error, results, fields) => {
             if (error) {
                 console.log(error)
@@ -55,9 +68,13 @@ module.exports = (connection) => {
                     description: 'A lot of money',
                     location: 'Bronx' }                                    
                 ]
-                
+              if(user_title !='' && user_title !=null){
+                results = results.filter((job)=>{
+                    return job.job_title.includes(user_title);
+                  });  
+              }
               console.log('result is ',results);
-                res.render('pages/index',{results:result})
+              res.render('pages/index',{results:results, id:user_id})
             }
         }
     

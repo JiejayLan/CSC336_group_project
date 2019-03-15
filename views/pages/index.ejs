@@ -1,29 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<% include ../partials/head%>
+	<% include ../partials/style%>
 </head>
+
 <body class="container">
+	<header>
+		<div class="container-fluid" >
+			<ul class="nav ">
 
-	<!-- <header>
-		<% include ../partials/header %>
-	</header> -->
+					<% if(id != null){ %>	
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Your Info</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Applied</a>
+						</li>
+					<% }; %>
 
+					<% if(id == null ){ %>	
+					<li class="nav-item">
+					  <a class="nav-link" href="#">Sign In</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link" href="#">New User</a>
+					</li>
+					<% }; %>
+			</ul>
+		</div>
+	</header>
+
+	<div style='position:absolute; right:2%; top:7% '>
+	<form action="/<%=id%>">
+		<div class="form-group" style='display:inline-block; width:30% ' >
+			<input type="text" class="form-control" id="InputLocation" name ='InputLocation' aria-describedby="emailHelp" placeholder="Location">
+		</div>
+		<div class="form-group" style='display:inline-block; width:30% '>
+			<input type="text" class="form-control" id="InputTitle" name = 'InputTitle' placeholder="Title">
+		</div>
+		<button type="submit" class="btn btn-primary btn-sm">Search</button>
+	</form>
+	</div>
 	<main>
 		<div class="jumbotron">
-
 			<div class="container">
 			<div class="row">
-				<% results.forEach(function(job) { %>
-					
+				<% results.forEach(function(job) { %>				
 					<div class="col-sm">
-							<div class="card" style="width: 18rem;">							
-									<div class="card-body">
-										<h5 class="card-title"><%= job.job_title%></h5>
-										<p class="card-text"><%= job.location%></p>
-										<a href="#" class="btn btn-primary">More Details</a>
-									</div>
+						<div class="card" style="width: 18rem;">							
+							<div class="card-body">
+								<h5 class="card-title"><%= job.job_title%></h5>
+								<p class="card-text"><%= job.location%></p>
+								<a href="/" class="btn btn-primary">More Details</a>
 							</div>
+						</div>
 					</div>
 				<% }); %>
 

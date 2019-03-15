@@ -21,6 +21,8 @@ const CONNECTION = mysql.createConnection({
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
+app.get('/:id', require('./controllers/jobs_controller.js')(CONNECTION));
+
 app.get('/users/:emplid', require('./controllers/get_user.js')(CONNECTION));
 app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(CONNECTION));
 
