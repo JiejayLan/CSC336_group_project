@@ -4,9 +4,8 @@ module.exports = (connection) => {
   return (req, res) => {
     let QUERY;
     let user_location =req.query.InputLocation; 
-    let user_id = req.params.id;
+    let user_id = req.session.user.user_ID;
     let user_title =req.query.InputTitle;
-    console.log('id is ',req.params.id)
     let query ='';
     let queryParam =[];
 
@@ -21,8 +20,6 @@ module.exports = (connection) => {
         queryParam =[user_location];       
     }
 
-
-    console.log('query ares', queryParam);
     connection.query( 
         QUERY,
         queryParam,
