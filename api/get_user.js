@@ -4,18 +4,14 @@ module.exports = (connection) => {
   return (req, res) => {
       
       const USER_EMPLID = req.params.emplid;
-      
-      const QUERY = 'SHOW DATABASES;'
-      /*
       const GET_USER_QUERY = 
           ' SELECT *' +
-          ' FROM Test' +
-          ' WHERE EmplId=' + USER_EMPLID +
-          ';';*/
+          ' FROM User' +
+          ' ;';
       
       connection.query(
           
-          QUERY,
+          GET_USER_QUERY,
           
           (error, results, fields) => {
               if (error) {
