@@ -1,3 +1,5 @@
+
+
 ;
 
 const request = require('request');
@@ -14,16 +16,17 @@ module.exports = (connection) => {
     .get(
       '/login', 
       (req, res) => {
-        res.send('GET');
+        res.render('pages/login')
       }
     )
       
     .post(
       '/login', 
       
-      bodyParser.json(),
+      bodyParser(),
       
       (req, res) => {
+        
         const REQUEST_ENDPOINT = 'https://' +
                                   req.hostname +
                                   '/api/authenticate';
@@ -41,6 +44,7 @@ module.exports = (connection) => {
               username: USERNAME,
               password: PASSWORD
             }
+            
           },
           
           (error, response, body) => {
@@ -63,13 +67,13 @@ module.exports = (connection) => {
                   delete req.session.user['username']
                   delete req.session.user['password']
                   
-                  res.redirect(200, '/')
+                  res.redirect('/')
                   break;
                 }
                 
                 case 204: {
                   
-                  res.redirect(401, '/login')
+                  res.redirect('/login')
                   break;
                 }
                 

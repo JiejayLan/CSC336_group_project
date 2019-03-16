@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 
 module.exports = (connection) => {
   return [
+    
     bodyParser.json(),
+    
     (req, res) => {
       
       const USERNAME = req.body.username;
