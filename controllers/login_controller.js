@@ -37,14 +37,13 @@ module.exports = (connection) => {
                                         '/api/authenticate';
                                         
                                         
-                                        
         const REQUEST_ENDPOINT =  req.hostname === 'localhost' ? 
                                   REQUEST_ENDPOINT_LOCAL :
                                   REQUEST_ENDPOINT_REMOTE;
         const REQUEST_METHOD = 'POST';
         const USERNAME = req.body.username;
         const PASSWORD = req.body.password;
-        
+  
         request(
           
           {
@@ -61,15 +60,18 @@ module.exports = (connection) => {
           (error, response, body) => {
             
             if (error) {
-              
+              console.log('error');
               res.status(400);
               res.json(error);
               
             } else {
-              
+              console.log('no error');
               const RESPONSE_STATUS_CODE = response.statusCode;
+<<<<<<< HEAD
               console.log(RESPONSE_STATUS_CODE);
               
+=======
+>>>>>>> jays_csc336/master
               switch (RESPONSE_STATUS_CODE) {
                 case 200: {
                   
@@ -93,15 +95,10 @@ module.exports = (connection) => {
                   
                   res.redirect(400, '/login')
                   break;
-                }
-                
-                  
-              }
+                }                          
+              }            
               
-              
-              
-            }
-            
+            }         
             
           }
         )
