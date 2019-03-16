@@ -27,13 +27,12 @@ module.exports = (connection) => {
       
       (req, res) => {
         
-        const REQUEST_ENDPOINT = 'https://' +
-                                  req.hostname +
-                                  '/api/authenticate';
+        const REQUEST_ENDPOINT = 'http://localhost:3003'
+                                  +'/api/authenticate';
         const REQUEST_METHOD = 'POST';
         const USERNAME = req.body.username;
         const PASSWORD = req.body.password;
-        
+  
         request(
           
           {
@@ -50,14 +49,13 @@ module.exports = (connection) => {
           (error, response, body) => {
             
             if (error) {
-              
+              console.log('error');
               res.status(400);
               res.json(error);
               
             } else {
-              
+              console.log('no error');
               const RESPONSE_STATUS_CODE = response.statusCode;
-              
               switch (RESPONSE_STATUS_CODE) {
                 case 200: {
                   
@@ -81,15 +79,10 @@ module.exports = (connection) => {
                   
                   res.redirect(400, '/login')
                   break;
-                }
-                
-                  
-              }
+                }                          
+              }            
               
-              
-              
-            }
-            
+            }         
             
           }
         )

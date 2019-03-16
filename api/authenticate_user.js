@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 
 module.exports = (connection) => {
+  console.log('chekc authenticate');
   return [
     
     bodyParser.json(),
@@ -33,8 +34,9 @@ module.exports = (connection) => {
             res.json(error);
             
           } else {
+
             if (results.length === 0) {
-              
+              console.log('not found');
               res.status(204);  //  Not found
               res.json(results);
               
