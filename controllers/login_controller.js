@@ -27,9 +27,20 @@ module.exports = (connection) => {
       
       (req, res) => {
         
-        const REQUEST_ENDPOINT = 'https://' +
-                                  req.hostname +
-                                  '/api/authenticate';
+        const REQUEST_ENDPOINT_LOCAL =  'http://' + 
+                                        req.hostname + ':' +  
+                                        process.env.PORT +
+                                        '/api/authenticate';
+                                        
+        const REQUEST_ENDPOINT_REMOTE = req.protocol + '://' +
+                                        req.hostname +
+                                        '/api/authenticate';
+                                        
+                                        
+                                        
+        const REQUEST_ENDPOINT =  req.hostname === 'localhost' ? 
+                                  REQUEST_ENDPOINT_LOCAL :
+                                  REQUEST_ENDPOINT_REMOTE;
         const REQUEST_METHOD = 'POST';
         const USERNAME = req.body.username;
         const PASSWORD = req.body.password;
@@ -57,6 +68,7 @@ module.exports = (connection) => {
             } else {
               
               const RESPONSE_STATUS_CODE = response.statusCode;
+              console.log(RESPONSE_STATUS_CODE);
               
               switch (RESPONSE_STATUS_CODE) {
                 case 200: {
