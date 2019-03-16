@@ -67,11 +67,7 @@ module.exports = (connection) => {
             } else {
               console.log('no error');
               const RESPONSE_STATUS_CODE = response.statusCode;
-<<<<<<< HEAD
-              console.log(RESPONSE_STATUS_CODE);
-              
-=======
->>>>>>> jays_csc336/master
+
               switch (RESPONSE_STATUS_CODE) {
                 case 200: {
                   
