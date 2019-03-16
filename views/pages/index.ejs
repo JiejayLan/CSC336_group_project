@@ -8,24 +8,26 @@
 	<header>
 		<div class="container-fluid" >
 			<ul class="nav ">
-
-					<% if(id != null){ %>	
-						<li class="nav-item">
-							<a class="nav-link active" href="#">Your Info</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="#">Applied</a>
-						</li>
-					<% }; %>
-
-					<% if(id == null ){ %>	
+				<% if(id != null){ %>	
 					<li class="nav-item">
-					  <a class="nav-link" href="#">Sign In</a>
+						<a class="nav-link active" href="#">Your Info</a>
 					</li>
 					<li class="nav-item">
-					  <a class="nav-link" href="#">New User</a>
+						<a class="nav-link active" href="#">Applied</a>
 					</li>
-					<% }; %>
+					<li class="nav-item">
+						<a class="nav-link active" href="http://localhost:3003/logout">logout</a>
+					</li>
+				<% }; %>
+
+				<% if(id == null ){ %>	
+				<li class="nav-item">
+					<a class="nav-link" href="http://localhost:3003/login">Sign In</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="http://localhost:3003/login">New User</a>
+				</li>
+				<% }; %>
 			</ul>
 		</div>
 	</header>
@@ -65,6 +67,14 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
-	
+
+<!-- <script type="application/javascript" src='../partials/logoutTimer.js'></script> -->
+<script type="text/javascript">
+	<% if(id != null){ %>	
+		<% include ../partials/logoutTimer.js %>
+	<% }; %>
+</script>
+
+
 </body>
 </html>
