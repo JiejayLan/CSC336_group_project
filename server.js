@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 //use mysql;
 const CONNECTION = mysql.createConnection({
     host: 'jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com',
-    user: "nooredin",
+    user: 'nooredin',
     password: 'nooredin',
     port: 3306,
     database: 'job_first'
