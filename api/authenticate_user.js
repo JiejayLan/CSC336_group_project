@@ -16,7 +16,9 @@ module.exports = (connection) => {
       const QUERY = ' SELECT ' +
                     '   *' +
                     ' FROM ' + 
-                    '   User' +
+                    '   User ' +
+                    '     NATURAL JOIN' +
+                    '   User_Type' +
                     ' WHERE' +
                     '   username=' + '"' + USERNAME + '"' +
                     '   AND' +
