@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const session = require('express-session');
 const app = express();
 const port = process.env.PORT || 3003;
+process.env.PORT = process.env.PORT || port;
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
@@ -21,7 +22,7 @@ app.use(session({
  * 'user' property. If the visitor is authenticated (through '/login'), then
  * session.user follows the following format:
  * 
- * user = {
+ * req.session.user = {
         user_ID:    undefined for visitors
                     <int>
         
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
     }
     
     next()
+    
 })
 //how to connect to aws rds on local computer
 //open mysql client
@@ -84,6 +86,6 @@ app.get('/about', function(req, res) {
 
 
 //Listen for incoming requests
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Server is up on local host 3003');
-  });
+  })
