@@ -42,7 +42,7 @@ module.exports = (connection) => {
                 console.log(error)
                 res.json(error)
             } else {
-              console.log('result is ',results);
+            //   console.log('result is ',results);
               res.render('pages/index',{results:results, id:user_id})
             }
         }

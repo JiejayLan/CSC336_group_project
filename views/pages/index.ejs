@@ -63,6 +63,19 @@
 			</div>
 		</div>
 	</main>
+	<form action="/postjob" method='post'>
+		<div>Submit A new Job</div>
+		<div class="form-group" >
+			<input type="text" class="form-control" id="title" name ='title' placeholder="Job Title">
+		</div>
+		<div class="form-group" >
+			<input type="text" class="form-control" id="description" name = 'description' placeholder="Title">
+		</div>
+		<div class="form-group" >
+			<input type="text" class="form-control" id="location" name = 'location' placeholder="Location">
+		</div>
+		<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+	</form>
 
 	<footer>
 		<% include ../partials/footer %>
