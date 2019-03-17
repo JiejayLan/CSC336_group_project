@@ -25,7 +25,6 @@ module.exports = (connection) => {
         ' ;'; 
     }
     else{
-        console.log(4);
         query= ' SELECT job_ID, job_title, location FROM Jobs WHERE' 
         +' job_title LIKE' 
         + '"%' + user_title 

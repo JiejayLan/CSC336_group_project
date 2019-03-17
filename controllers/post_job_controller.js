@@ -3,34 +3,65 @@ module.exports = (connection) => {
     const uuid = require('uuid/v1');
     return (req, res) => {
           
-        // console.log("post job",req.body.title,req.body.location,req.body.description);
-        console.log(uuid());
-        // res.json({'status':'post successfully'});
+        console.log(String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16)));
         let query;
-        const JOB_ID = uuid();
-        const POSTER_ID = req.session.user.user_ID;
+        const JOB_ID = 656;
+        // const POSTER_ID = req.session.user.user_ID;
+        const POSTER_ID = 104;
         const JOB_DESCRIPTION = req.body.description;
         const JOB_LOCATION = req.body.location;
         const JOB_TITLE = req.body.title;
-        //incomplete
-        // connection.query( 
-        //     query,
-        //     (error, results, fields) => {
-        //         if (error) {
-        //             res.json(error)
-        //         } else {
-        //             res.redirect('/');
-        //         }
-        //     }
+        const PARAMATER = [JOB_ID,POSTER_ID ,JOB_TITLE ,JOB_DESCRIPTION,JOB_LOCATION];
+        query = 
+        'INSERT INTO Jobs(job_ID,poster_ID,job_title,description,location)'+
+        'VALUES ('+
+        JOB_ID +',' + '"'+POSTER_ID+'", "' + JOB_TITLE+ '","' + JOB_DESCRIPTION +'","' 
+        + JOB_LOCATION+'");'
+
+        console.log(query);
+        connection.query( 
+            query,
+            // PARAMATER,
+            (error, results, fields) => {
+                if (error) {
+                    res.json(error)
+                } else {
+                    res.redirect('/');
+                }
+            }
         
-        // );
-        res.redirect('/');
+        );
+        // res.redirect('/');
   
        
     }  
 }
 
 
-    // let job_title = req.body.title;
-    // let job_location = req.body.location;
-    // let job_description= req.body.description;
+// INSERT INTO Jobs(job_ID,poster_ID,job_title,description,location)
+// VALUES
+//     (
+//         1000,
+//         103,
+//         'front-end programmer',
+//         'one of the best job',
+//         'New York'
+
+//     ),
+//     (
+//         1001,
+//         104,
+//         'MTA bus operator',
+//         'A lot of money',
+//         'Bronx'
+//     );
+
+
+// query= ' SELECT job_ID, job_title, location FROM Jobs WHERE' 
+// +' job_title LIKE' 
+// + '"%' + user_title 
+// + '%"'
+// +'AND '
+// +'location ='
+// +'"'+user_location+ '"'
+// ' ;';   
