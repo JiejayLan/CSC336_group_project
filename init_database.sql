@@ -3,44 +3,69 @@ CREATE DATABASE job_first;
 USE job_first;
 
 
+CREATE TABLE User_Type(
+    type_ID INTEGER NOT NULL,
+    type_name VARCHAR(64),
+    INDEX(type_ID ),
+	PRIMARY KEY(type_ID)
+)ENGINE=INNODB;
+INSERT INTO User_Type(type_ID ,type_name)
+VALUES
+    (
+        1,
+        'employee'
+    ),
+    (
+        2,
+        'employer'
+    );
+
 CREATE TABLE User (
     user_ID INTEGER UNSIGNED NOT NULL,
 	username VARCHAR(64) NOT NULL,
 	password VARCHAR(64) NOT NULL,
     phone_number VARCHAR(50),
     email VARCHAR(50),
+    user_type INTEGER,
+    FOREIGN KEY (user_type)
+      REFERENCES User_Type(type_ID)
+      ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY(user_ID)
 )ENGINE=INNODB;
 
-INSERT INTO User(user_ID,username,password,phone_number,email )
+INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
     VALUES
         (
             100,
             'shi bin',
             'shibin',
             '547-502-5653',
-            'shibin32@gmail.com'
+            'shibin32@gmail.com',
+            1
         ),
         (
             101,
             'Jie Lan',
             'jielan',
             '347-502-5643',
-            'lanjie45632@gmail.com'
+            'lanjie45632@gmail.com',
+            1
         ),
         (
             103,
             'gong',
             'shibin1',
             '557-502-5653',
-            'gong2@gmail.com'
+            'gong2@gmail.com',
+            2
         ),
         (
             104,
             'pan',
             'jielan2',
             '347-502-5343',
-            'pan45632@gmail.com'
+            'pan45632@gmail.com',
+            2
         );
 
 
@@ -93,33 +118,8 @@ VALUES
     );
 
 
-CREATE TABLE User_Type(
-    type_ID INTEGER UNSIGNED NOT NULL,
-    type_name VARCHAR(64),
-    INDEX(type_ID ),
-    FOREIGN KEY (type_ID )
-      REFERENCES User(user_ID)
-      ON UPDATE CASCADE ON DELETE CASCADE,
-	PRIMARY KEY(type_ID)
-)ENGINE=INNODB;
-INSERT INTO User_Type(type_ID ,type_name)
-VALUES
-    (
-        100,
-        'employee'
-    ),
-    (
-        101,
-        'employee'
-    ),
-    (
-        103,
-        'employer'
-    ),
-    (
-        104,
-        'employer'
-    );
+
+
 
 
 
