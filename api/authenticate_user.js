@@ -13,16 +13,17 @@ module.exports = (connection) => {
       
       const USERNAME = req.body.username;
       const PASSWORD = req.body.password;
+      
       const QUERY = ' SELECT ' +
                     '   *' +
                     ' FROM ' + 
-                    '   User ' +
-                    '     NATURAL JOIN' +
-                    '   User_Type' +
+                    '   User, User_Type' +
                     ' WHERE' +
-                    '   username=' + '"' + USERNAME + '"' +
+                    '   User.username=' + '"' + USERNAME + '"' +
                     '   AND' +
-                    '   password=' + '"' + PASSWORD + '"'
+                    '   User.password=' + '"' + PASSWORD + '"' +
+                    '   AND' +
+                    '   User_Type.type_ID=User.user_type'
                     ' ;';
       
       connection.query(
@@ -36,7 +37,7 @@ module.exports = (connection) => {
             res.json(error);
             
           } else {
-
+            
             if (results.length === 0) {
               console.log('not found');
               res.status(204);  //  Not found
