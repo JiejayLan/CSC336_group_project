@@ -67,7 +67,7 @@ module.exports = (connection) => {
             } else {
               console.log('no error');
               const RESPONSE_STATUS_CODE = response.statusCode;
-
+              console.log(RESPONSE_STATUS_CODE)
               switch (RESPONSE_STATUS_CODE) {
                 case 200: {
                   
