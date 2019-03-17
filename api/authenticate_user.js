@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 
 module.exports = (connection) => {
-  console.log('chekc authenticate');
+  console.log('check authenticate');
   return [
     
     bodyParser.json(),
