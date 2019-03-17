@@ -7,7 +7,9 @@ const port = process.env.PORT || 3003;
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-
+let bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 //  Create sessions
 app.use(session({
     secret: 'temporarySecret',
@@ -43,8 +45,11 @@ app.use((req, res, next) => {
     
     next()
 })
-
-
+//how to connect to aws rds on local computer
+//open mysql client
+//Enter:mysql -u nooredin -p -h jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com
+//Enter:nooredin
+//use mysql;
 const CONNECTION = mysql.createConnection({
     host: 'jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com',
     user: "nooredin",
@@ -56,7 +61,12 @@ const CONNECTION = mysql.createConnection({
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
-// app.get('/:id', require('./controllers/jobs_controller.js')(CONNECTION));
+app.get('/logout', (req, res) => {
+    delete req.session.user
+    console.log('logout');
+    res.redirect('/login')
+});
+app.post('/postjob', require('./controllers/post_job_controller')(CONNECTION))
 
 app.get('/users/:emplid', require('./controllers/get_user.js')(CONNECTION));
 app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(CONNECTION));
