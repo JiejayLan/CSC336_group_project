@@ -44,7 +44,7 @@ module.exports = (connection) => {
               res.json(results);
               
             } else {
-              
+              console.log(results);
               res.status(200)   //  Okay
               res.json(results)
               
