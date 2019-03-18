@@ -74,8 +74,8 @@ app.post('/postjob', require('./controllers/post_job_controller')(CONNECTION))
 app.get('/users/:emplid', require('./controllers/get_user.js')(CONNECTION));
 app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(CONNECTION));
 
-app.get('/personal_profile', require('./controllers/personal_profile_controller.js')(CONNECTION));
-app.get('/business_profile', require('./controllers/business_profile_controller.js')(CONNECTION));
+app.get('/personal/:id', require('./controllers/personal_profile_controller.js')(CONNECTION));
+app.get('/business/:id', require('./controllers/business_profile_controller.js')(CONNECTION));
 app.all('/login', require('./controllers/login_controller.js')(CONNECTION))
 
 //  API (internal?)
