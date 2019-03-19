@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const session = require('express-session');
+const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3003;
 process.env.PORT = process.env.PORT || port;
@@ -53,13 +54,14 @@ app.use((req, res, next) => {
 //Enter:mysql -u nooredin -p -h jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com
 //Enter:nooredin
 //use mysql;
-const CONNECTION = mysql.createConnection({
-    host: 'jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com',
-    user: 'nooredin',
-    password: 'nooredin',
-    port: 3306,
-    database: 'job_first'
-})
+
+
+//  Read and parse credentials from file './credentials/db_credentials'
+//  then create a connection to the database
+const CONNECTION = mysql.createConnection(
+    JSON.parse(fs.readFileSync(
+        './credentials/db_credentials', 
+        {encoding: 'utf-8'})))
 
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
