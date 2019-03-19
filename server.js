@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const session = require('express-session');
 const app = express();
 const port = process.env.PORT || 3003;
+process.env.PORT = process.env.PORT || port;
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
@@ -10,7 +11,6 @@ app.use(express.static('public'));
 let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 //  Create sessions
 app.use(session({
     secret: 'temporarySecret',
@@ -22,7 +22,7 @@ app.use(session({
  * 'user' property. If the visitor is authenticated (through '/login'), then
  * session.user follows the following format:
  * 
- * user = {
+ * req.session.user = {
         user_ID:    undefined for visitors
                     <int>
         
@@ -44,7 +44,9 @@ app.use((req, res, next) => {
         
     }
     
+    
     next()
+    
 })
 //how to connect to aws rds on local computer
 //open mysql client
@@ -53,7 +55,7 @@ app.use((req, res, next) => {
 //use mysql;
 const CONNECTION = mysql.createConnection({
     host: 'jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com',
-    user: "nooredin",
+    user: 'nooredin',
     password: 'nooredin',
     port: 3306,
     database: 'job_first'
@@ -88,6 +90,6 @@ app.get('/about', function(req, res) {
 
 
 //Listen for incoming requests
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Server is up on local host 3003');
-  });
+  })
