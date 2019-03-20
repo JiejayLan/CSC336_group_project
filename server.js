@@ -15,7 +15,8 @@ app.use(bodyParser.json());
 //  Create sessions
 app.use(session({
     secret: 'temporarySecret',
-    saveUnitialized: false
+    saveUnitialized: false,
+    maxAge: 1000 * 60 * 5       //  5 minutes
 }))
 /**
  * 
@@ -36,15 +37,32 @@ app.use(session({
  * 
  * */
 app.use((req, res, next) => {
+    //  req.session.user is resetted after a specific duration of time
+    //  to prevent persistent user sessions
     
-    if (req.session.user === undefined) {
+    const SESSION_DURATION = 1000 * 60 ;     //  1 minute sessions
+    const FIRST_VISIT = req.session.user === undefined;     //  First visit
+    const SESSION_EXPIRED = Date.now() >        //  Session expired
+                                req.session.start + SESSION_DURATION
+    
+    //  Reset session if user is visiting for the first time
+    //  or session has expired
+    if (FIRST_VISIT || SESSION_EXPIRED) {
         
+        //  Remove user info
         req.session.user = {
             user_ID: undefined
         }
         
+        //  Restart session start
+        req.session.start = Date.now();
+        
+    } else if (!SESSION_EXPIRED) {
+        
+        //  Renew session start if still in session
+        req.session.start = Date.now();
+        
     }
-    
     
     next()
     
@@ -66,11 +84,7 @@ const CONNECTION = mysql.createConnection(
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
-app.get('/logout', (req, res) => {
-    delete req.session.user
-    console.log('logout');
-    res.redirect('/login')
-});
+app.get('/logout', require('./controllers/logout_controller.js')(CONNECTION));
 app.post('/postjob', require('./controllers/post_job_controller')(CONNECTION))
 
 app.get('/users/:emplid', require('./controllers/get_user.js')(CONNECTION));

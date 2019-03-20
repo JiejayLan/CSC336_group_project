@@ -16,7 +16,18 @@ module.exports = (connection) => {
     .get(
       '/login', 
       (req, res) => {
-        res.render('pages/login')
+        
+        const USER_IS_LOGGED_IN = req.session.user.user_ID !== undefined;
+        
+        if (USER_IS_LOGGED_IN) {
+          
+          res.redirect('/')
+          
+        } else {
+          
+          res.render('pages/login')
+          
+        }
       }
     )
       
@@ -27,6 +38,7 @@ module.exports = (connection) => {
       
       (req, res) => {
         
+        //  Define variables
         const REQUEST_ENDPOINT_LOCAL =  'http://' + 
                                         req.hostname + ':' +  
                                         process.env.PORT +
@@ -43,7 +55,10 @@ module.exports = (connection) => {
         const REQUEST_METHOD = 'POST';
         const USERNAME = req.body.username;
         const PASSWORD = req.body.password;
-  
+        
+        
+        //  Make a request to '/api/authenticate'
+        //  to verify user credentials
         request(
           
           {
@@ -98,6 +113,7 @@ module.exports = (connection) => {
             
           }
         )
+        
         
       }
     )
