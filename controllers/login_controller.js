@@ -24,7 +24,9 @@ module.exports = (connection) => {
           res.redirect('/')
           
         } else {
+          
           res.render('pages/login')
+          
         }
       }
     )
