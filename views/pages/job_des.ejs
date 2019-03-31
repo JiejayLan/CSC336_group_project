@@ -1,0 +1,23 @@
+<h1>Job Description</h1>
+<div>
+    <li>
+        <p>Job_title: <%= info.job_title%></p>
+    </li>
+    <li>
+        <p>Description: <%= info.description%> </p>
+    </li>
+    <li>
+        <p>Location: <%= info.location%> </p>
+    </li>
+    <li>
+        <p>Employer Business: <%= info.business%> </p>
+    </li>
+    <li>
+        <p>Address: <%= info.address%> </p>
+    </li>
+    <button onclick="window.location.href='/'"">Back</button>
+    <form action="/apply/<%= info.job_ID%>" method='POST'>
+        <button>Apply</button>
+    </form>
+
+</div> 

@@ -13,7 +13,7 @@
 						<a class="nav-link" href="http://localhost:3003/login">Sign In</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="http://localhost:3003/login">New User</a>
+						<a class="nav-link" href="http://localhost:3003/sign_up">New User</a>
 					</li>
 				<% } else if(user_type === 'employer'){ %>	
 					<li class="nav-item">
@@ -79,7 +79,10 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= job.job_title%></h5>
 									<p class="card-text"><%= job.location%></p>
-									<a href="/" class="btn btn-primary">More Details</a>
+									<!-- <form action="/job_des" method="get">
+										<button class="btn btn-primary">More Details</button>
+									</form> -->
+									<a href="/job_des/<%= job.job_ID%>" class="btn btn-primary">More Details</a>
 								</div>
 							</div>
 						</div>

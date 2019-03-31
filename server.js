@@ -83,6 +83,16 @@ const CONNECTION = mysql.createConnection(
 
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
+app.get('/sign_up', require('./controllers/sign_up_controller.js')(CONNECTION));
+app.get('/sign_up_employee', require('./controllers/sign_up_employee_controller.js')(CONNECTION));
+app.get('/sign_up_employer', require('./controllers/sign_up_employer_controller.js')(CONNECTION));
+
+app.post('/add_user/Employee', require('./controllers/add_user_employee_controller.js')(CONNECTION));
+app.post('/add_user/Employer', require('./controllers/add_user_employer_controller.js')(CONNECTION));
+
+app.get('/job_des/:job_id', require('./controllers/job_des_controller.js')(CONNECTION));
+app.post('/apply/:job_id', require('./controllers/apply_controller.js')(CONNECTION));
+
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
 app.get('/logout', require('./controllers/logout_controller.js')(CONNECTION));
 app.post('/postjob', require('./controllers/post_job_controller')(CONNECTION))
