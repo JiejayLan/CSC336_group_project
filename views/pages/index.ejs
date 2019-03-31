@@ -79,7 +79,10 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= job.job_title%></h5>
 									<p class="card-text"><%= job.location%></p>
-									<a href="/job_des" class="btn btn-primary">More Details</a>
+									<!-- <form action="/job_des" method="get">
+										<button class="btn btn-primary">More Details</button>
+									</form> -->
+									<a href="/job_des/<%= job.job_ID%>" class="btn btn-primary">More Details</a>
 								</div>
 							</div>
 						</div>
