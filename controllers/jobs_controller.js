@@ -47,7 +47,7 @@ module.exports = (connection) => {
                 res.json(error)
             } else {
             //   console.log('result is ',results);
-              res.render('pages/index',{results:results,user_type:user_type})
+              res.render('pages/index',{results:results,user_type:user_type, user_id:user_id})
             }
         }
     
