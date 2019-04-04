@@ -30,7 +30,8 @@ module.exports = (connection) => {
                 (error,results, field) => {
                     if(error){
                         console.log(error)
-                        res.json(error)
+                        //res.json(error)
+                        res.redirect('/')
                     }
                 }
             );
@@ -39,7 +40,8 @@ module.exports = (connection) => {
                 (error, results, field) => {
                     if(error){
                         console.log(error)
-                        res.json(error)
+                        // res.json(error)
+                        res.redirect('/')
                     } else{
                         res.redirect('/')
                     }
