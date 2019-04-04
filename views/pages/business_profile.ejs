@@ -26,13 +26,15 @@
         <div class="container">
           <section class="resume-section p-lg-5" id="contact">
             <div class="w-100">
-              <h2 class="mb-3">New York Computer</h2>
+              <h2 class="mb-3"><%= business.username %></h2>
               <div class="lead mb-5">
                 <h3>Contact:</h3>
                   <label>Email: </label>
-                  <a href="#">nyccomputer@email.com</a><br>
+                  <a href="#"><%= business.email %></a><br>
                   <label>Phone: </label>
-                  <text>023-456-7890</text><br>
+                  <text><%= business.phone_number %></text><br>
+                  <label>Address: </label>
+                  <text><%= business.address %></text>
               </div>
             </div>
           </section>
@@ -45,7 +47,7 @@
                     <h2>Business</h2>
                     <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="resume-content">
-                            <p class="lead">Computer programming business</p>
+                            <p class="lead"><%= business.business %></p>
                         </div>
                     </div>
               </div>
@@ -57,10 +59,11 @@
           <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="jobs">
             <div class="w-100">
               <h2 class="mb-5">Job Posted</h2>
-      
+              <% results.forEach(function(job) { %>
               <div class="">
-                            <a href='#' class="lead">Test Job</a><br>
+                  <a href='/job_des/<%= job.job_ID%>' class="lead"><%= job.job_title %></a><br>
               </div>
+              <% }); %>
       
             </div>
           </section>
