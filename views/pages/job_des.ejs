@@ -16,8 +16,10 @@
         <p>Address: <%= info.address%> </p>
     </li>
     <button onclick="window.location.href='/'"">Back</button>
+    <% if (user_type == 'employee') { %>
     <form action="/apply/<%= info.job_ID%>" method='POST'>
         <button>Apply</button>
     </form>
+<% } %>
 
 </div> 

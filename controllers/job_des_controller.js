@@ -23,7 +23,7 @@ module.exports = (connection) => {
                     // const poster_id = results.poster_ID;
                     // const location = results.location;
                     // let info = [job_title, description, location, poster_id];
-                    res.render('pages/job_des',{info: results[0]})
+                    res.render('pages/job_des',{info: results[0], user_type: req.session.user.type_name })
                 }
             }
         );
