@@ -100,6 +100,7 @@ app.post('/add_user/Employer', require('./controllers/add_user_employer_controll
 
 app.get('/job_des/:job_id', require('./controllers/job_des_controller.js')(CONNECTION));
 app.post('/apply/:job_id', require('./controllers/apply_controller.js')(CONNECTION));
+app.post('/follow/:poster_id', require('./controllers/follow_controller.js')(CONNECTION));
 
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
 app.get('/logout', require('./controllers/logout_controller.js')(CONNECTION));
