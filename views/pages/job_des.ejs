@@ -16,13 +16,21 @@
         <p>Address: <%= info.address%> </p>
     </li>
     <button onclick="window.location.href='/'"">Back</button>
-    <% if (user_type == 'employee') { %>
+    <% if (user_type == 'employee' ) { %>
     <form action="/apply/<%= info.job_ID%>" method='POST'>
         <button>Apply</button>
     </form>
+    <% if(status == 'unfollowed'){ %>
     <form action="/follow/<%= info.poster_ID%>" method='POST'>
         <button>Follow</button>
     </form>
+    <% }  %>
+    <% if(status == 'followed'){ %>
+        <form action="/unfollow/<%= info.poster_ID%>" method='POST'>
+            <button>UnFollow</button>
+        </form>
+    <% } %>
+
 <% } %>
 
 </div> 
