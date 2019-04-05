@@ -4,8 +4,10 @@ module.exports = (connection) => {
 
     return (req, res) => {
         let employer_ID = req.params.poster_id;
+        let employee_ID = req.session.user.user_ID;
         let query = 'DELETE FROM Follow WHERE followed_ID='
-                    +req.params.poster_id + ';'
+                    + employer_ID + ' AND follower_ID = ' 
+                    + employee_ID + ';'
         console.log(req.params.poster_id)
         console.log(req.session.user.user_ID)
         connection.query(
