@@ -30,6 +30,7 @@ module.exports = (connection) => {
                     let query2 = 'SELECT followed_ID FROM Follow WHERE follower_ID='
                      + req.session.user.user_ID;
                      //console.log('poster_ID is: ', poster_ID)
+                     if(req.session.user.user_ID != undefined){
                         connection.query(
                             query2,
                             (error, result, fields) => {
@@ -49,6 +50,10 @@ module.exports = (connection) => {
                                 }
                             }
                         );
+                     }
+                     else{
+                        res.render('pages/job_des',{info: results[0], user_type: req.session.user.type_name })
+                     }
                 }
             }
         );
