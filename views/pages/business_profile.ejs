@@ -53,13 +53,14 @@
               </div>
             </div>
           </section>
-      
+
+          <% if(user_id  == id ){ %>
           <hr class="m-0">
       
           <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="jobs">
             <div class="w-100">
               <h2 class="mb-5">Job Posted</h2>
-              <% results.forEach(function(job) { %>
+              <% jobs.forEach(function(job) { %>
               <div class="">
                   <a href='/job_des/<%= job.job_ID%>' class="lead"><%= job.job_title %></a><br>
               </div>
@@ -69,7 +70,7 @@
           </section>
       
           <hr class="m-0">
-    
+          <%};%>
         </div>
       
       </body>
