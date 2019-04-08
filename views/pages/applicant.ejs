@@ -1,0 +1,18 @@
+<head>
+    <% include ../partials/style%>
+</head>
+
+<body id="page-top">
+    <div class="container">
+        <section class="resume-section p-lg-5" id="contact">
+            <div class="w-100">
+                <h2 class="mb-3">Applicants:</h2>
+                <div class="lead mb-5">
+                    <% jobs.forEach(function(job) { %>
+                    <a href='/personal/<%= job.applicant_ID%>'><%= job.username %></a><br>
+                    <% }); %>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>

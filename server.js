@@ -112,6 +112,7 @@ app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(
 
 app.get('/personal/:id', require('./controllers/personal_profile_controller.js')(CONNECTION));
 app.get('/business/:id', require('./controllers/business_profile_controller.js')(CONNECTION));
+app.get('/applicant/:id', require('./controllers/applicants_controller.js')(CONNECTION));
 app.all('/login', require('./controllers/login_controller.js')(CONNECTION))
 
 //  API (internal?)
