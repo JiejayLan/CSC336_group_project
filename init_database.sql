@@ -38,7 +38,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             100,
             'shi bin',
-            'shibin',
+            'shibin1',
             '547-502-5653',
             'shibin32@gmail.com',
             1
@@ -46,7 +46,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             101,
             'Jie Lan',
-            'jielan',
+            'jielan1',
             '347-502-5643',
             'lanjie45632@gmail.com',
             1
@@ -54,7 +54,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             103,
             'gong',
-            'shibin1',
+            'gong1',
             '557-502-5653',
             'gong2@gmail.com',
             2
@@ -62,7 +62,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             104,
             'pan',
-            'jielan2',
+            'pan1',
             '347-502-5343',
             'pan45632@gmail.com',
             2
@@ -90,7 +90,7 @@ INSERT INTO Employee(employee_ID,education,experience)
         (
             101,
             'high school',
-            'I love food and cartoons'
+            'I love food and coding'
         );
 
 
@@ -108,18 +108,14 @@ INSERT INTO Employer(employer_ID,business,address)
 VALUES
     (
         103,
-        'barbershop',
+        'google',
         '254 Avenue S. brooklyn. ny. 11224'
     ),
     (
         104,
-        'food mart',
+        'MTA',
         '254 Avenue A. NY. ny. 11226'
     );
-
-
-
-
 
 
 
@@ -141,7 +137,7 @@ VALUES
         1000,
         103,
         'front-end programmer',
-        'one of the best job',
+        'need to know HTML,CSS,JS',
         'New York'
 
     ),
@@ -149,9 +145,26 @@ VALUES
         1001,
         104,
         'MTA bus operator',
-        'A lot of money',
+        '20$ per hour, plus extra benefit',
         'Bronx'
-    );
+    )
+    (
+        1002,
+        103,
+        'back-end programmer',
+        'Need to know mysql, AWS',
+        'New York'
+
+    ),
+    (
+        1003,
+        104,
+        'MTA train driver',
+        'need to word overnight',
+        'New York'
+
+    ),      
+    ;
 
 CREATE TABLE Application(
     application_ID INTEGER UNSIGNED NOT NULL,
