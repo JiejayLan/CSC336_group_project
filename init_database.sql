@@ -43,8 +43,8 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         ),
         (
             101,
-            'Jie Lan',
-            'jielan1',
+            'jay',
+            'jay1',
             '347-502-5643',
             'lanjie45632@gmail.com',
             1
@@ -269,8 +269,21 @@ BEGIN
 
 END//
 
+
+-- CREATE FUNCTION searchJob (location VARCHAR(128), title VARCHAR(128))
+-- RETURNS INTEGER UNSIGNED
+
+-- BEGIN
+--     DECLARE member_id INTEGER UNSIGNED;
+--     SELECT id FROM Member WHERE user = pName AND ring = pRing INTO member_id;
+--     RETURN member_id;
+-- END//
+
+
+
 DELIMITER ;
 -- end of function, trigger, view and procedure
+
 
 -- Insert data
 CALL PostJob(1000, 103, "front-end programmer", "need to know HTML,CSS,JS","New York");
