@@ -5,7 +5,6 @@ USE job_first;
 CREATE TABLE User_Type(
     type_ID INTEGER NOT NULL,
     type_name VARCHAR(64),
-    INDEX(type_ID ),
 	PRIMARY KEY(type_ID)
 )ENGINE=INNODB;
 INSERT INTO User_Type(type_ID ,type_name)
@@ -72,7 +71,6 @@ CREATE TABLE Employee (
     employee_ID INTEGER UNSIGNED NOT NULL,
     education VARCHAR(128),
     experience VARCHAR(500),
-    INDEX(employee_ID),
     FOREIGN KEY (employee_ID)
       REFERENCES User(user_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
@@ -97,7 +95,6 @@ CREATE TABLE Employer (
     employer_ID INTEGER UNSIGNED NOT NULL,
     business VARCHAR(128),
     address VARCHAR(128), 
-    INDEX(employer_ID),
     FOREIGN KEY (employer_ID)
       REFERENCES User(user_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
