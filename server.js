@@ -83,6 +83,26 @@ const CONNECTION = mysql.createConnection(
 
 //  Route handling.
 //  Each handler is in it's own file within ./controllers
+// app.get('/sign_up', require('./controllers/sign_up_controller.js')(CONNECTION));
+// app.get('/sign_up_employee', require('./controllers/sign_up_employee_controller.js')(CONNECTION));
+// app.get('/sign_up_employer', require('./controllers/sign_up_employer_controller.js')(CONNECTION));
+app.get('/sign_up', (req, res) => {
+    res.render('pages/sign_up')
+});
+app.get('/sign_up_employee', (req, res)=> {
+    res.render('pages/sign_up_employee')
+});
+app.get('/sign_up_employer', (req, res)=> {
+    res.render('pages/sign_up_employer')
+});
+app.post('/add_user/Employee', require('./controllers/add_user_employee_controller.js')(CONNECTION));
+app.post('/add_user/Employer', require('./controllers/add_user_employer_controller.js')(CONNECTION));
+
+app.get('/job_des/:job_id', require('./controllers/job_des_controller.js')(CONNECTION));
+app.post('/apply/:job_id', require('./controllers/apply_controller.js')(CONNECTION));
+app.post('/follow/:poster_id', require('./controllers/follow_controller.js')(CONNECTION));
+app.post('/unfollow/:poster_id', require('./controllers/unfollow_controller.js')(CONNECTION));
+
 app.get('/', require('./controllers/jobs_controller.js')(CONNECTION));
 app.get('/logout', require('./controllers/logout_controller.js')(CONNECTION));
 app.post('/postjob', require('./controllers/post_job_controller')(CONNECTION))
@@ -92,6 +112,7 @@ app.get('/users/:id/jobs', require('./controllers/get_user_jobs_controller.js')(
 
 app.get('/personal/:id', require('./controllers/personal_profile_controller.js')(CONNECTION));
 app.get('/business/:id', require('./controllers/business_profile_controller.js')(CONNECTION));
+app.get('/applicant/:id', require('./controllers/applicants_controller.js')(CONNECTION));
 app.all('/login', require('./controllers/login_controller.js')(CONNECTION))
 
 //  API (internal?)
