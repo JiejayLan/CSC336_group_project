@@ -2,11 +2,9 @@ DROP DATABASE IF EXISTS job_first;
 CREATE DATABASE job_first;
 USE job_first;
 
-
 CREATE TABLE User_Type(
     type_ID INTEGER NOT NULL,
     type_name VARCHAR(64),
-    INDEX(type_ID ),
 	PRIMARY KEY(type_ID)
 )ENGINE=INNODB;
 INSERT INTO User_Type(type_ID ,type_name)
@@ -38,15 +36,15 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             100,
             'shi bin',
-            'shibin',
+            'shibin1',
             '547-502-5653',
             'shibin32@gmail.com',
             1
         ),
         (
             101,
-            'Jie Lan',
-            'jielan',
+            'jay',
+            'jay1',
             '347-502-5643',
             'lanjie45632@gmail.com',
             1
@@ -54,7 +52,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             103,
             'gong',
-            'shibin1',
+            'gong1',
             '557-502-5653',
             'gong2@gmail.com',
             2
@@ -62,7 +60,7 @@ INSERT INTO User(user_ID,username,password,phone_number,email,user_type )
         (
             104,
             'pan',
-            'jielan2',
+            'pan1',
             '347-502-5343',
             'pan45632@gmail.com',
             2
@@ -73,7 +71,6 @@ CREATE TABLE Employee (
     employee_ID INTEGER UNSIGNED NOT NULL,
     education VARCHAR(128),
     experience VARCHAR(500),
-    INDEX(employee_ID),
     FOREIGN KEY (employee_ID)
       REFERENCES User(user_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
@@ -90,7 +87,7 @@ INSERT INTO Employee(employee_ID,education,experience)
         (
             101,
             'high school',
-            'I love food and cartoons'
+            'I love food and coding'
         );
 
 
@@ -98,7 +95,6 @@ CREATE TABLE Employer (
     employer_ID INTEGER UNSIGNED NOT NULL,
     business VARCHAR(128),
     address VARCHAR(128), 
-    INDEX(employer_ID),
     FOREIGN KEY (employer_ID)
       REFERENCES User(user_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
@@ -108,18 +104,14 @@ INSERT INTO Employer(employer_ID,business,address)
 VALUES
     (
         103,
-        'barbershop',
+        'google',
         '254 Avenue S. brooklyn. ny. 11224'
     ),
     (
         104,
-        'food mart',
+        'MTA',
         '254 Avenue A. NY. ny. 11226'
     );
-
-
-
-
 
 
 
@@ -135,23 +127,7 @@ CREATE TABLE Jobs (
       ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY(job_ID)
 )ENGINE=InnoDB;
-INSERT INTO Jobs(job_ID,poster_ID,job_title,description,location)
-VALUES
-    (
-        1000,
-        103,
-        'front-end programmer',
-        'one of the best job',
-        'New York'
 
-    ),
-    (
-        1001,
-        104,
-        'MTA bus operator',
-        'A lot of money',
-        'Bronx'
-    );
 
 CREATE TABLE Application(
     application_ID INTEGER UNSIGNED NOT NULL,
@@ -168,6 +144,7 @@ CREATE TABLE Application(
       ON UPDATE CASCADE ON DELETE CASCADE,
     PRIMARY KEY(application_ID)
 )ENGINE=InnoDB;
+
 INSERT INTO Application(application_ID ,created_on,applicant_ID,applied_jobID)
 VALUES
     (
@@ -183,13 +160,6 @@ VALUES
         101,
         1001
     );
-
-
-
-
-
-
-
 
 CREATE TABLE Applied (
     applicant_ID INTEGER UNSIGNED NOT NULL REFERENCES Employee(employee_ID),
@@ -222,10 +192,6 @@ VALUES
         1001,
         1001
     );
-
-
-
-
 
 CREATE TABLE Follow(
     follower_ID INTEGER UNSIGNED NOT NULL,
@@ -291,6 +257,39 @@ VALUES
         101,
         101
     );
+
+
+-- start of function, trigger, view and procedure
+DELIMITER //
+
+CREATE PROCEDURE PostJob (IN job_ID INTEGER UNSIGNED, IN poster_ID INTEGER UNSIGNED, IN job_title VARCHAR(128), IN description VARCHAR(500), IN location VARCHAR(128))
+BEGIN
+
+    INSERT INTO Jobs VALUES (job_ID, poster_ID, job_title, description, location);
+
+END//
+
+
+-- CREATE FUNCTION searchJob (location VARCHAR(128), title VARCHAR(128))
+-- RETURNS INTEGER UNSIGNED
+
+-- BEGIN
+--     DECLARE member_id INTEGER UNSIGNED;
+--     SELECT id FROM Member WHERE user = pName AND ring = pRing INTO member_id;
+--     RETURN member_id;
+-- END//
+
+
+
+DELIMITER ;
+-- end of function, trigger, view and procedure
+
+
+-- Insert data
+CALL PostJob(1000, 103, "front-end programmer", "need to know HTML,CSS,JS","New York");
+CALL PostJob(1001, 103, "MTA bus operator", "20$ per hour, plus extra benefit","Bronx");
+CALL PostJob(1002, 104, "back-end programmer", "Need to know mysql, AWS","New York");
+CALL PostJob(1003, 104, "MTA train driver", "eed to word overnight","New York");
 
 
 
