@@ -69,8 +69,8 @@ app.use((req, res, next) => {
 })
 //how to connect to aws rds on local computer
 //open mysql client
-//Enter:mysql -u nooredin -p -h jobfirstdatabase.c1vr39jujtbs.us-east-2.rds.amazonaws.com
-//Enter:nooredin
+//Enter:mysql -u jobfirstadmin -p -h jobfirst.cjzllw8rj12r.us-east-2.rds.amazonaws.com
+//Enter:jobfirstpw
 //use mysql;
 
 
