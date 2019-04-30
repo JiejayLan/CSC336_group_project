@@ -269,6 +269,11 @@ BEGIN
 
 END//
 
+CREATE TRIGGER add_date BEFORE INSERT 
+ON Application
+FOR EACH ROW 
+    set NEW.created_on = NOW();
+//
 
 -- CREATE FUNCTION searchJob (location VARCHAR(128), title VARCHAR(128))
 -- RETURNS INTEGER UNSIGNED
