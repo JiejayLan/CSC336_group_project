@@ -196,8 +196,6 @@ VALUES
 CREATE TABLE Follow(
     follower_ID INTEGER UNSIGNED NOT NULL,
     followed_ID INTEGER UNSIGNED NOT NULL,
-    INDEX(follower_ID),
-    INDEX(followed_ID),
     FOREIGN KEY (follower_ID)
       REFERENCES Employee(employee_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
@@ -236,8 +234,6 @@ VALUES
 CREATE TABLE Speak(
     person_ID INTEGER UNSIGNED NOT NULL  ,
     language_ID INTEGER UNSIGNED NOT NULL ,
-    INDEX(person_ID ),
-    INDEX(language_ID),
     FOREIGN KEY (person_ID)
       REFERENCES Employee(employee_ID)
       ON UPDATE CASCADE ON DELETE CASCADE,
@@ -258,37 +254,30 @@ VALUES
         101
     );
 
-
+DROP procedure IF EXISTS  PostJob;
 -- start of function, trigger, view and procedure
 DELIMITER //
 
 CREATE PROCEDURE PostJob (IN job_ID INTEGER UNSIGNED, IN poster_ID INTEGER UNSIGNED, IN job_title VARCHAR(128), IN description VARCHAR(500), IN location VARCHAR(128))
-BEGIN
+    BEGIN
 
-    INSERT INTO Jobs VALUES (job_ID, poster_ID, job_title, description, location);
+        INSERT INTO Jobs VALUES (job_ID, poster_ID, job_title, description, location);
 
-END//
-
-CREATE TRIGGER add_date BEFORE INSERT 
-ON Application
-FOR EACH ROW 
-    set NEW.created_on = NOW();
-//
-
--- CREATE FUNCTION searchJob (location VARCHAR(128), title VARCHAR(128))
--- RETURNS INTEGER UNSIGNED
-
--- BEGIN
---     DECLARE member_id INTEGER UNSIGNED;
---     SELECT id FROM Member WHERE user = pName AND ring = pRing INTO member_id;
---     RETURN member_id;
--- END//
-
+    END//
 
 
 DELIMITER ;
 -- end of function, trigger, view and procedure
 
+DROP procedure IF EXISTS  SearchJob;
+DELIMITER //
+    CREATE PROCEDURE SearchJob (job_location VARCHAR(128), title VARCHAR(128))
+    BEGIN
+            SELECT * FROM Jobs WHERE job_title LIKE CONCAT('%',title,'%');
+    END//
+DELIMITER ;
+
+CALL SearchJob("gfg","MTA");
 
 -- Insert data
 CALL PostJob(1000, 103, "front-end programmer", "need to know HTML,CSS,JS","New York");
