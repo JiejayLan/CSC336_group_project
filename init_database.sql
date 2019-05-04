@@ -286,4 +286,14 @@ CALL PostJob(1002, 104, "back-end programmer", "Need to know mysql, AWS","New Yo
 CALL PostJob(1003, 104, "MTA train driver", "eed to word overnight","New York");
 
 -- Create Views
-CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee;
+DROP VIEW IF EXISTS EmployeeUser;
+CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee WHERE user_ID = employee_ID;
+
+DROP VIEW IF EXISTS FollowUser;
+CREATE VIEW FollowUser AS SELECT * FROM User JOIN Follow ON followed_ID = user_ID;
+
+DROP VIEW IF EXISTS SpeakLanguage;
+CREATE VIEW SpeakLanguage AS SELECT * FROM Speak NATURAL JOIN Language;
+
+DROP VIEW IF EXISTS AppliedJobs;
+CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = job_ID;
