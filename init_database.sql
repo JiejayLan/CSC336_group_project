@@ -265,6 +265,11 @@ CREATE PROCEDURE PostJob (IN job_ID INTEGER UNSIGNED, IN poster_ID INTEGER UNSIG
 
     END//
 
+CREATE TRIGGER add_date BEFORE INSERT 
+ON Application
+FOR EACH ROW 
+    set NEW.created_on = NOW();
+//
 
 DELIMITER ;
 -- end of function, trigger, view and procedure
