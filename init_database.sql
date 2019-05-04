@@ -285,5 +285,5 @@ CALL PostJob(1001, 103, "MTA bus operator", "20$ per hour, plus extra benefit","
 CALL PostJob(1002, 104, "back-end programmer", "Need to know mysql, AWS","New York");
 CALL PostJob(1003, 104, "MTA train driver", "eed to word overnight","New York");
 
-
-
+-- Create Views
+CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee;

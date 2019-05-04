@@ -27,7 +27,6 @@ module.exports = (connection) => {
           console.log(error)
           res.json(error)
         } else {
-          //console.log('result is ',results);
           let user = results;
           connection.query(
             query1,
@@ -36,7 +35,6 @@ module.exports = (connection) => {
                 console.log(error)
                 res.json(error)
               } else {
-                //console.log('follow is ',results);
                 let follow = results;
                 connection.query(
                   query2,
