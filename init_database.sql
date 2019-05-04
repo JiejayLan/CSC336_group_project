@@ -297,3 +297,7 @@ CREATE VIEW SpeakLanguage AS SELECT * FROM Speak NATURAL JOIN Language;
 
 DROP VIEW IF EXISTS AppliedJobs;
 CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = job_ID;
+
+DROP VIEW IF EXISTS EmployerUser;
+CREATE VIEW EmployerUser AS SELECT * FROM User NATURAL JOIN Employer WHERE user_ID = employer_ID;
+
