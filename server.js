@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 //open mysql client
 //Enter:mysql -u jobfirstadmin -p -h jobfirst.cjzllw8rj12r.us-east-2.rds.amazonaws.com
 //Enter:jobfirstpw
-//use mysql;
+//use job_first;
 
 
 //  Read and parse credentials from file './credentials/db_credentials'
