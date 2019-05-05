@@ -127,9 +127,31 @@ CREATE TABLE Speak(
     PRIMARY KEY(person_ID, language_ID)
 )ENGINE=InnoDB;
 
+-- DROP PROCEDURE IF EXISTS PostJob;
 -- DROP PROCEDURE IF EXISTS SearchJob;
--- DROP PROCEDURE IF EXISTS SearchJob;
+-- DROP PROCEDURE IF EXISTS GetEmployee;
+-- DROP PROCEDURE IF EXISTS GetFollow;
+-- DROP PROCEDURE IF EXISTS GetSpeak;
+-- DROP PROCEDURE IF EXISTS GetApplied;
+-- DROP PROCEDURE IF EXISTS GetEmployer;
+-- DROP PROCEDURE IF EXISTS GetJob;
 -- start of function, trigger, view and procedure
+-- Create Views
+DROP VIEW IF EXISTS EmployeeUser;
+CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee WHERE user_ID = employee_ID;
+
+DROP VIEW IF EXISTS FollowUser;
+CREATE VIEW FollowUser AS SELECT * FROM User JOIN Follow ON followed_ID = user_ID;
+
+DROP VIEW IF EXISTS SpeakLanguage;
+CREATE VIEW SpeakLanguage AS SELECT * FROM Speak NATURAL JOIN Language;
+
+DROP VIEW IF EXISTS AppliedJobs;
+CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = job_ID;
+
+DROP VIEW IF EXISTS EmployerUser;
+CREATE VIEW EmployerUser AS SELECT * FROM User NATURAL JOIN Employer WHERE user_ID = employer_ID;
+
 DELIMITER //
 
     CREATE PROCEDURE PostJob (IN job_ID INTEGER UNSIGNED, IN poster_ID INTEGER UNSIGNED, IN job_title VARCHAR(128), IN description VARCHAR(500), IN location VARCHAR(128))
@@ -150,6 +172,36 @@ DELIMITER //
             ELSE
                 SELECT * FROM Jobs WHERE job_title LIKE CONCAT('%',title,'%') AND location = job_location; 
             END IF;
+        END//
+    
+    CREATE PROCEDURE GetEmployee (ID INT)
+        BEGIN
+            SELECT * FROM EmployeeUser WHERE employee_ID = ID;
+        END//
+    
+    CREATE PROCEDURE GetFollow (ID INT)
+        BEGIN
+            SELECT * FROM FollowUser WHERE follower_ID = ID;
+        END//
+    
+    CREATE PROCEDURE GetSpeak (ID INT)
+        BEGIN
+            SELECT * FROM SpeakLanguage WHERE person_ID = ID;
+        END//
+
+    CREATE PROCEDURE GetApplied (ID INT)
+        BEGIN
+            SELECT * FROM AppliedJobs WHERE applicant_ID = ID;
+        END//
+    
+    CREATE PROCEDURE GetEmployer (ID INT)
+        BEGIN
+            SELECT * FROM EmployerUser WHERE employer_ID = ID;
+        END//
+    
+    CREATE PROCEDURE GetJob (ID INT)
+        BEGIN
+            SELECT * FROM Jobs WHERE poster_ID = ID;
         END//
 
 DELIMITER ;
@@ -341,22 +393,6 @@ CALL PostJob(1000, 103, "front-end programmer", "need to know HTML,CSS,JS","New 
 CALL PostJob(1001, 103, "MTA bus operator", "20$ per hour, plus extra benefit","Bronx");
 CALL PostJob(1002, 104, "back-end programmer", "Need to know mysql, AWS","New York");
 CALL PostJob(1003, 104, "MTA train driver", "eed to word overnight","New York");
-
--- Create Views
-DROP VIEW IF EXISTS EmployeeUser;
-CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee WHERE user_ID = employee_ID;
-
-DROP VIEW IF EXISTS FollowUser;
-CREATE VIEW FollowUser AS SELECT * FROM User JOIN Follow ON followed_ID = user_ID;
-
-DROP VIEW IF EXISTS SpeakLanguage;
-CREATE VIEW SpeakLanguage AS SELECT * FROM Speak NATURAL JOIN Language;
-
-DROP VIEW IF EXISTS AppliedJobs;
-CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = job_ID;
-
-DROP VIEW IF EXISTS EmployerUser;
-CREATE VIEW EmployerUser AS SELECT * FROM User NATURAL JOIN Employer WHERE user_ID = employer_ID;
 
 INSERT INTO Application(application_ID ,created_on,applicant_ID,applied_jobID)
     VALUES
