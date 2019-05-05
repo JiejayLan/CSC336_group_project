@@ -259,6 +259,22 @@ CALL PostJob(1001, 103, "MTA bus operator", "20$ per hour, plus extra benefit","
 CALL PostJob(1002, 104, "back-end programmer", "Need to know mysql, AWS","New York");
 CALL PostJob(1003, 104, "MTA train driver", "eed to word overnight","New York");
 
+-- Create Views
+DROP VIEW IF EXISTS EmployeeUser;
+CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee WHERE user_ID = employee_ID;
+
+DROP VIEW IF EXISTS FollowUser;
+CREATE VIEW FollowUser AS SELECT * FROM User JOIN Follow ON followed_ID = user_ID;
+
+DROP VIEW IF EXISTS SpeakLanguage;
+CREATE VIEW SpeakLanguage AS SELECT * FROM Speak NATURAL JOIN Language;
+
+DROP VIEW IF EXISTS AppliedJobs;
+CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = job_ID;
+
+DROP VIEW IF EXISTS EmployerUser;
+CREATE VIEW EmployerUser AS SELECT * FROM User NATURAL JOIN Employer WHERE user_ID = employer_ID;
+
 INSERT INTO Application(application_ID ,created_on,applicant_ID,applied_jobID)
     VALUES
         (
