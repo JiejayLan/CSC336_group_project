@@ -4,24 +4,29 @@ module.exports = (connection) => {
   return (req, res) => {
     let page_id = req.params.id;
     let user_id = req.session.user.user_ID;
-    let query = "SELECT * "
-      + "FROM User NATURAL JOIN Employee "
-      + "WHERE employee_ID = " + page_id + " AND user_ID = " + page_id + ";";
+    // let query = "SELECT * "
+    //   + "FROM User NATURAL JOIN Employee "
+    //   + "WHERE employee_ID = " + page_id + " AND user_ID = " + page_id + ";";
+    let query = 'CALL GetEmployee(?);';
 
-    let query1 = "SELECT * "
-      + "FROM Follow JOIN User ON followed_ID = user_ID "
-      + "WHERE follower_ID = " + page_id + ";"
+    // let query1 = "SELECT * "
+    //   + "FROM Follow JOIN User ON followed_ID = user_ID "
+    //   + "WHERE follower_ID = " + page_id + ";"
+    let query1 = 'CALL GetFollow(?);';
 
-    let query2 = "SELECT * "
-      + "FROM Speak NATURAL JOIN Language "
-      + "WHERE person_ID = " + page_id + ";"
+    // let query2 = "SELECT * "
+    //   + "FROM Speak NATURAL JOIN Language "
+    //   + "WHERE person_ID = " + page_id + ";"
+    let query2 = 'CALL GetSpeak(?);'
 
-    let query3 = "SELECT * "
-    + "FROM Applied JOIN Jobs ON applied_jobID = job_ID "
-    + "WHERE applicant_ID = " + page_id + ";"
+    // let query3 = "SELECT * "
+    // + "FROM Applied JOIN Jobs ON applied_jobID = job_ID "
+    // + "WHERE applicant_ID = " + page_id + ";"
+    let query3 = 'CALL GetApplied(?);'
 
     connection.query(
       query,
+      [page_id],
       (error, results, fields) => {
         if (error) {
           console.log(error)
@@ -30,6 +35,7 @@ module.exports = (connection) => {
           let user = results;
           connection.query(
             query1,
+            [page_id],
             (error, results, fields) => {
               if (error) {
                 console.log(error)
@@ -38,6 +44,7 @@ module.exports = (connection) => {
                 let follow = results;
                 connection.query(
                   query2,
+                  [page_id],
                   (error, results, fields) => {
                     if (error) {
                       console.log(error)
@@ -46,6 +53,7 @@ module.exports = (connection) => {
                       let language = results;
                       connection.query(
                         query3,
+                        [page_id],
                         (error, results, fields) => {
                           if (error) {
                             console.log(error)
