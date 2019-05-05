@@ -127,8 +127,14 @@ CREATE TABLE Speak(
     PRIMARY KEY(person_ID, language_ID)
 )ENGINE=InnoDB;
 
+-- DROP PROCEDURE IF EXISTS PostJob;
 -- DROP PROCEDURE IF EXISTS SearchJob;
--- DROP PROCEDURE IF EXISTS SearchJob;
+-- DROP PROCEDURE IF EXISTS GetEmployee;
+-- DROP PROCEDURE IF EXISTS GetFollow;
+-- DROP PROCEDURE IF EXISTS GetSpeak;
+-- DROP PROCEDURE IF EXISTS GetApplied;
+-- DROP PROCEDURE IF EXISTS GetEmployer;
+-- DROP PROCEDURE IF EXISTS GetJob;
 -- start of function, trigger, view and procedure
 -- Create Views
 DROP VIEW IF EXISTS EmployeeUser;
