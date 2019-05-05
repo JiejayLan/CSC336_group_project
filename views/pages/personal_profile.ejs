@@ -33,6 +33,10 @@
           <a href="#"><%= user.email %></a><br>
           <label>Phone: </label>
           <text><%= user.phone_number %></text><br>
+          <Label>Language Speak:</Label>
+          <% language.forEach(function(item) { %>
+            <br><text><%= item.language_name %></text>
+          <% }); %>
         </div>
       </div>
     </section>
@@ -70,7 +74,19 @@
           <a href='/business/<%= item.followed_ID%>' class="lead"><%= item.username %></a><br>
           <% }); %>
         </div>
+      </div>
+    </section>
+    <hr class="m-0">
 
+    <hr class="m-0">
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="follow">
+      <div class="w-100">
+        <h2 class="mb-5">Job Applied</h2>
+        <div class="">
+          <% applied.forEach(function(item) { %>
+          <a href='/job_des/<%= item.job_ID%>' class="lead"><%= item.job_title %></a><br>
+          <% }); %>
+        </div>
       </div>
     </section>
     <hr class="m-0">
