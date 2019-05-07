@@ -13,8 +13,8 @@ module.exports = (connection) => {
         title = null;    
     // console.log(location , title);
 
-    query = 'CALL SearchJob(?,?);';
-
+    // query = 'CALL SearchJob(?,?);';
+    query = 'SELECT job_ID, job_title, location FROM Jobs WHERE SearchJob(?,?,location ,job_title)';
     connection.query( 
         query,
         [location,title],
@@ -23,8 +23,8 @@ module.exports = (connection) => {
                 console.log(error)
                 res.json(error)
             } else {
-              console.log('result is ',results[0]);
-              res.render('pages/index',{results:results[0],user_type:user_type, user_id:user_id})
+              console.log('result is ',results);
+              res.render('pages/index',{results:results,user_type:user_type, user_id:user_id})
             }
         }
     
