@@ -13,34 +13,41 @@ module.exports = (connection) => {
         const BUSINESS = req.body.business;
         const ADDRESS = req.body.address;
         const USER_TYPE = 2;
-        query = 
-        'INSERT INTO User(user_ID, username, password, phone_number, email, user_type)'+
-        'VALUES ('+ USER_ID +',' + '"'+USER_NAME+'", "' + PASSWORD+ '","' + PHONE_NUMBER +'","' 
-        +  EMAIL+ '", ' + USER_TYPE  + ');'
+        // query = 
+        // 'INSERT INTO User(user_ID, username, password, phone_number, email, user_type)'+
+        // 'VALUES ('+ USER_ID +',' + '"'+USER_NAME+'", "' + PASSWORD+ '","' + PHONE_NUMBER +'","' 
+        // +  EMAIL+ '", ' + USER_TYPE  + ');'
 
-        query2 = 
-        'INSERT INTO Employer(employer_ID, business, address) VALUES ('
-        + USER_ID + ',' + '"' + BUSINESS + '"' + ',' + '"' + ADDRESS + '"' + ');'
+        // query2 = 
+        // 'INSERT INTO Employer(employer_ID, business, address) VALUES ('
+        // + USER_ID + ',' + '"' + BUSINESS + '"' + ',' + '"' + ADDRESS + '"' + ');'
+
+        let query3 = 'CALL spAddEmployer(?,?,?,?,?,?,?,?);'
         console.log(req.body);
         console.log('user added');
         connection.query(
-            query,
+            query3,
+            [USER_ID, USER_NAME,
+                PASSWORD, PHONE_NUMBER , EMAIL , USER_TYPE ,
+                 BUSINESS , ADDRESS ],
             (error, result, fields) => {
                 if(error){
                     res.json(error)
-            }
-        }
-        );
-        connection.query(
-            query2,
-            (error, results, fields) => {
-                if(error){
-                    res.json(error)
-                }  else {
+                } else {
                     res.redirect('/')
                 }
-            }
+        }
         );
+        // connection.query(
+        //     query2,
+        //     (error, results, fields) => {
+        //         if(error){
+        //             res.json(error)
+        //         }  else {
+        //             res.redirect('/')
+        //         }
+        //     }
+        // );
 
         //res.redirect('/');
     };
