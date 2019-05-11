@@ -15,7 +15,6 @@ module.exports = (connection) => {
         let query = 'SELECT * FROM Jobs JOIN Employer ON poster_ID = employer_ID WHERE job_ID='
                     + req.params.job_id;
         // let query = 'CALL spGetJobDescription1(?);'
-        // let query2 = 'CALL PROCEDURE spGetJobDescription2(?);'
         connection.query(
             // query,
             // [req.params.job_id],
