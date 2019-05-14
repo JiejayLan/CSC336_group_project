@@ -147,14 +147,16 @@ CREATE TRIGGER add_date BEFORE INSERT
     FOR EACH ROW 
         set NEW.created_on = NOW();
     //
-CREATE PROCEDURE spApply(user_ID INTEGER UNSIGNED, applied_jobID INTEGER UNSIGNED, application_ID INTEGER UNSIGNED )
+CREATE PROCEDURE spApply1(IN user_ID INTEGER UNSIGNED, IN applied_jobID INTEGER UNSIGNED, IN application_ID INTEGER UNSIGNED )
     BEGIN
-        INSERT INTO Applied(applicant_ID, applied_jobID, application_ID) VALUE(
-                    user_ID , applied_jobID , application_ID );
         INSERT INTO Application(application_ID, applicant_ID, applied_jobID) VALUES (
                     application_ID , user_ID ,applied_jobID );
     END//
-
+CREATE PROCEDURE spApply2(IN user_ID INTEGER UNSIGNED, IN applied_jobID INTEGER UNSIGNED, IN application_ID INTEGER UNSIGNED )
+    BEGIN
+        INSERT INTO Applied(applicant_ID, applied_jobID, application_ID) VALUE(
+                    user_ID , applied_jobID , application_ID );
+    END//
 
 CREATE PROCEDURE spFollow(user_ID INTEGER UNSIGNED, employer_ID INTEGER UNSIGNED)
     BEGIN
