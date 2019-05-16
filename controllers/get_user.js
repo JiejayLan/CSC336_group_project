@@ -7,12 +7,14 @@ module.exports = (connection) => {
       const GET_USER_QUERY = 
           ' SELECT *' +
           ' FROM User' +
-          ' WHERE user_ID=' + USER_EMPLID +
+          ' WHERE user_ID=? ' + 
           ';'
       
       connection.query(
           
           GET_USER_QUERY,
+          
+          [USER_EMPLID],
           
           (error, results, fields) => {
               if (error) {
