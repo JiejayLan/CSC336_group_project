@@ -19,15 +19,17 @@ module.exports = (connection) => {
                     ' FROM ' + 
                     '   User, User_Type' +
                     ' WHERE' +
-                    '   User.username=' + '"' + USERNAME + '"' +
+                    '   User.username=? ' +
                     '   AND' +
-                    '   User.password=' + '"' + PASSWORD + '"' +
+                    '   User.password=? ' +
                     '   AND' +
                     '   User_Type.type_ID=User.user_type'
                     ' ;';
       
       connection.query(
         QUERY,
+        
+        [USERNAME, PASSWORD],
         
         (error, results, fields) => {
           if (error) {
